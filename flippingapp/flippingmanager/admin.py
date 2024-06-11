@@ -1,7 +1,32 @@
 from django.contrib import admin
-from .models import Sale, Purchase, Category, Channel
+from django.utils.html import format_html
 
-admin.site.register(Sale)
-admin.site.register(Purchase)
+from .models import Purchase, Sale, Category, Channel
+
+class PurchaseAdmin(admin.ModelAdmin):
+    list_display = ('name', 'category', 'date', 'channel', 'price', 'is_sold')
+
+class SaleAdmin(admin.ModelAdmin):
+    list_display = ('purchase', 'date', 'channel', 'fee', 'shipping_cost', 'price', 'get_profit')
+    readonly_fields = ('purchase_link', 'get_profit')
+
+    def purchase_link(self, obj):
+        # Crea un link al prodotto Purchase e mostra il prezzo
+        url = f'/admin/flippingmanager/purchase/{obj.purchase.id}/change/'
+        return format_html(
+            '<a href="{}">{}</a>: {}€',
+            url,
+            obj.purchase.name,
+            obj.purchase.price
+        )
+    
+    def get_profit(self, obj):
+        return obj.profit
+    
+    purchase_link.short_description = 'Purchase Product Link - Purchase Price'
+    get_profit.short_description = 'Profit'    
+
+admin.site.register(Purchase, PurchaseAdmin)
+admin.site.register(Sale, SaleAdmin)
 admin.site.register(Category)
 admin.site.register(Channel)

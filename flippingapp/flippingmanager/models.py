@@ -23,7 +23,7 @@ class Purchase(models.Model):
     is_sold = models.BooleanField(default=False)
     
     def __str__(self):
-        return f"{self.name} - {self.date.strftime("%d/%m/%Y")}"
+        return f"{self.name} - {self.date.strftime('%d/%m/%Y')}"
 
 
 class Sale(models.Model):
@@ -33,7 +33,11 @@ class Sale(models.Model):
     fee = models.DecimalField(max_digits=10, decimal_places=2, default=0) 
     shipping_cost = models.DecimalField(max_digits=10, decimal_places=2, default=0) 
     price = models.DecimalField(max_digits=10, decimal_places=2, default=0)
+
     
     def __str__(self):
         return f"{self.purchase.name} - {self.date.strftime('%d/%m/%Y')}"
 
+    @property
+    def profit(self):
+        return self.price - self.fee - self.shipping_cost - self.purchase.price
