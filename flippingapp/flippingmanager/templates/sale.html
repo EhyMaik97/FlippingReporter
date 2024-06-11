@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Sale List</title>
+</head>
+<body>
+    <h1>Sale List</h1>
+    <table>
+        <tr>
+            <th>Purchase</th>
+            <th>Date</th>
+            <th>Channel</th>
+            <th>Fee</th>
+            <th>Shipping Cost</th>
+            <th>Price</th>
+        </tr>
+        {% for sale in sales %}
+            <tr>
+                <td>{{ sale.purchase }}</td>
+                <td>{{ sale.date | date:"d m Y" }}</td>
+                <td>{{ sale.channel }}</td>
+                <td>{{ sale.fee }}</td>
+                <td>{{ sale.shipping_cost }}</td>
+                <td>{{ sale.price }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>

@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Channel List</title>
+</head>
+<body>
+    <h1>Channel List</h1>
+    <ul>
+        {% for channel in channels %}
+            <li>{{ channel.name }}</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
