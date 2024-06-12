@@ -7,4 +7,5 @@ urlpatterns = [
     path("purchase/", views.purchase, name="purchase"),
     path("category/", views.category, name="category"),
     path("channel/", views.channel, name="channel"),
+    path('statistic/', views.statistic, name='statistic'),
 ]
