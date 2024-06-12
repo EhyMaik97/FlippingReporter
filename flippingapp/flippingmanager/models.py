@@ -1,6 +1,6 @@
 from django.db import models
 from django.utils import timezone
-
+from djmoney.models.fields import MoneyField
 
 class Channel(models.Model):
     name = models.CharField(max_length=100, unique=True)
@@ -19,20 +19,20 @@ class Purchase(models.Model):
     category = models.ForeignKey(Category, on_delete=models.CASCADE, null=True)
     channel = models.ForeignKey(Channel, on_delete=models.CASCADE, null=True)
     date = models.DateField(default=timezone.now)
-    price = models.DecimalField(max_digits=10, decimal_places=2)
+    price = MoneyField(max_digits=10, decimal_places=2, default_currency='EUR')
     is_sold = models.BooleanField(default=False)
     
     def __str__(self):
-        return f"{self.name} - {self.date.strftime('%d/%m/%Y')}"
+        return f"{self.name}"
 
 
 class Sale(models.Model):
     purchase = models.ForeignKey(Purchase, on_delete=models.CASCADE, limit_choices_to={'sale__isnull': True})
     date = models.DateField(default=timezone.now)
     channel = models.ForeignKey(Channel, on_delete=models.CASCADE, null=True)
-    fee = models.DecimalField(max_digits=10, decimal_places=2, default=0) 
-    shipping_cost = models.DecimalField(max_digits=10, decimal_places=2, default=0) 
-    price = models.DecimalField(max_digits=10, decimal_places=2, default=0)
+    fee = MoneyField(max_digits=10, decimal_places=2, default_currency='EUR')
+    shipping_cost = MoneyField(max_digits=10, decimal_places=2, default_currency='EUR') 
+    price = MoneyField(max_digits=10, decimal_places=2, default_currency='EUR')
 
     
     def __str__(self):
@@ -40,4 +40,6 @@ class Sale(models.Model):
 
     @property
     def profit(self):
-        return self.price - self.fee - self.shipping_cost - self.purchase.price
+        if self.price and self.fee and self.shipping_cost and self.purchase.price:
+            return self.price - self.fee - self.shipping_cost - self.purchase.price
+        return f'0.00€'

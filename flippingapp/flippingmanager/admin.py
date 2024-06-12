@@ -11,19 +11,18 @@ class SaleAdmin(admin.ModelAdmin):
     readonly_fields = ('purchase_link', 'get_profit')
 
     def purchase_link(self, obj):
-        # Crea un link al prodotto Purchase e mostra il prezzo
         url = f'/admin/flippingmanager/purchase/{obj.purchase.id}/change/'
         return format_html(
-            '<a href="{}">{}</a>: {}€',
+            '<a href="{}">{}</a>: {}',
             url,
             obj.purchase.name,
             obj.purchase.price
         )
     
     def get_profit(self, obj):
-        return obj.profit
+        return f'{obj.profit}'
     
-    purchase_link.short_description = 'Purchase Product Link - Purchase Price'
+    purchase_link.short_description = 'Product Link - Purchase Price'
     get_profit.short_description = 'Profit'    
 
 admin.site.register(Purchase, PurchaseAdmin)
