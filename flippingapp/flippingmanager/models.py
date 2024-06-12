@@ -21,13 +21,14 @@ class Purchase(models.Model):
     date = models.DateField(default=timezone.now)
     price = MoneyField(max_digits=10, decimal_places=2, default_currency='EUR')
     is_sold = models.BooleanField(default=False)
+    notes = models.TextField(blank=True, null=True)
     
     def __str__(self):
         return f"{self.name}"
 
 
 class Sale(models.Model):
-    purchase = models.ForeignKey(Purchase, on_delete=models.CASCADE, limit_choices_to={'sale__isnull': True})
+    purchase = models.ForeignKey(Purchase, on_delete=models.CASCADE)
     date = models.DateField(default=timezone.now)
     channel = models.ForeignKey(Channel, on_delete=models.CASCADE, null=True)
     fee = MoneyField(max_digits=10, decimal_places=2, default_currency='EUR')
@@ -40,6 +41,6 @@ class Sale(models.Model):
 
     @property
     def profit(self):
-        if self.price and self.fee and self.shipping_cost and self.purchase.price:
+        if self.price is not None and self.fee is not None and self.shipping_cost is not None and self.purchase.price is not None:
             return self.price - self.fee - self.shipping_cost - self.purchase.price
-        return f'0.00€'
+        return 0.00

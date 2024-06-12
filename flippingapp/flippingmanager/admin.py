@@ -5,7 +5,7 @@ from .models import Purchase, Sale, Category, Channel
 
 class PurchaseAdmin(admin.ModelAdmin):
     list_display = ('name', 'category', 'date', 'channel', 'price', 'is_sold')
-
+    
 class SaleAdmin(admin.ModelAdmin):
     list_display = ('purchase', 'date', 'channel', 'fee', 'shipping_cost', 'price', 'get_profit')
     readonly_fields = ('purchase_link', 'get_profit')
@@ -23,7 +23,7 @@ class SaleAdmin(admin.ModelAdmin):
         return f'{obj.profit}'
     
     purchase_link.short_description = 'Product Link - Purchase Price'
-    get_profit.short_description = 'Profit'    
+    get_profit.short_description = 'Profit'
 
 admin.site.register(Purchase, PurchaseAdmin)
 admin.site.register(Sale, SaleAdmin)
