@@ -3,8 +3,14 @@ from django.utils.html import format_html
 
 from .models import Purchase, Sale, Category, Channel
 
+
+def mark_as_sold(modeladmin, request, queryset):
+    queryset.update(is_sold=True)
+mark_as_sold.short_description = "Mark selected purchases as sold"
+
 class PurchaseAdmin(admin.ModelAdmin):
     list_display = ('name', 'category', 'date', 'channel', 'price', 'is_sold')
+    actions = [mark_as_sold]
     
 class SaleAdmin(admin.ModelAdmin):
     list_display = ('purchase', 'date', 'channel', 'fee', 'shipping_cost', 'price', 'get_profit')

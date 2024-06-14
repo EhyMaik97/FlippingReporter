@@ -28,13 +28,12 @@ class Purchase(models.Model):
 
 
 class Sale(models.Model):
-    purchase = models.ForeignKey(Purchase, on_delete=models.CASCADE)
+    purchase = models.ForeignKey(Purchase, on_delete=models.CASCADE, limit_choices_to={'sale__isnull': True})
     date = models.DateField(default=timezone.now)
     channel = models.ForeignKey(Channel, on_delete=models.CASCADE, null=True)
     fee = MoneyField(max_digits=10, decimal_places=2, default_currency='EUR')
     shipping_cost = MoneyField(max_digits=10, decimal_places=2, default_currency='EUR') 
     price = MoneyField(max_digits=10, decimal_places=2, default_currency='EUR')
-
     
     def __str__(self):
         return f"{self.purchase.name} - {self.date.strftime('%d/%m/%Y')}"

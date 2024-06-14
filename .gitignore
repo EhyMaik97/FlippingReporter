@@ -8,4 +8,6 @@ env/
 venv/
 *.env
 *.log
+
+# Ignore database file
 db.sqlite3
