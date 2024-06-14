@@ -66,7 +66,6 @@ Go to http://127.0.0.1:8000/statistic/ and access to the statistics page to view
 
 - models.py: Defines the data models for Channel, Category, Purchase, and Sale.
 - admin.py: Customizes the admin interface for better data management.
-- management/commands/import_data.py: Implements the import command for reading data from Excel files.
 - templates/: Contains HTML templates for the admin interface and statistics page.
 - views.py: Implements the views for rendering statistics.
 
