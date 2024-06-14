@@ -1,6 +1,6 @@
 # FlippingReporter
 
-FlippingReporter is a Django application for managing the buying and selling of items, recording purchases and sales, and providing detailed profit statistics. The app allows importing data from an Excel file and offers an admin dashboard for data management.
+FlippingReporter is a Django application for managing the buying and selling of items, recording purchases and sales, and providing detailed profit statistics.
 
 ## Features
 
