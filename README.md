@@ -14,8 +14,9 @@
 ## Installation
 ### Clone the repository:
 
-    git clone [https://github.com/EhyMaik97/flippingmanager.git](https://github.com/EhyMaik97/FlippingReporter.git)
+    git clone https://github.com/EhyMaik97/FlippingReporter.git
     cd flippingmanager
+    
 
 
 ### Create and activate a virtual environment:
