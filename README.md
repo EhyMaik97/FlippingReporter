@@ -14,7 +14,7 @@
 ## Installation
 ### Clone the repository:
 
-    git clone https://github.com/yourusername/flippingmanager.git
+    git clone https://github.com/EhyMaik97/flippingmanager.git
     cd flippingmanager
 
 
