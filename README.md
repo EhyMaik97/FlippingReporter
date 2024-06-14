@@ -57,7 +57,7 @@ Mark Purchases as Sold: Once a purchase is included in a sale, it is marked as s
 
 ### View Statistics
 
-Access the statistics page to view various analytics, such as:
+Go to http://127.0.0.1:8000/statistic/ and access to the statistics page to view various analytics, such as:
 - Percentage distribution of purchase channels and categories.
 - Percentage distribution of sale channels.
 - Total purchase costs, sale revenues, and profits.
